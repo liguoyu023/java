@@ -1,4 +1,4 @@
-package liguoyu;
+package liguoyu.common;
 
 import java.text.DateFormat;
 import java.text.ParseException;
