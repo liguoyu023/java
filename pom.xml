@@ -17,9 +17,9 @@
             </dependency>
 
         <dependency>
-            <groupId>apache-lang</groupId>
+            <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.1</version>
+            <version>2.3</version>
         </dependency>
 
         <!--Jsoup 用于xss过滤 以及html解析 -->
