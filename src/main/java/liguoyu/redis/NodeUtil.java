@@ -5,9 +5,6 @@ import org.w3c.dom.Node;
 
 /**
  * 结点帮助类。将节点转变为默认值
- * 
- * @author Wangjiajun 
- * @Email  wangjiajun@58.com
  * @date   2016年2月24日
  */
 public class NodeUtil {
