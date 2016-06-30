@@ -26,23 +26,39 @@ public class NIOServer {
     private  ByteBuffer receivebuffer = ByteBuffer.allocate(BLOCK);
 
     private Selector selector;
+
+    /**
+     * 构造函数 主要是为了开启套接字 并注册到selector
+     * @param port
+     * @throws IOException
+     */
     public NIOServer(int port) throws IOException{
-
+        //通过Selector中的SelectorProvider创建一个ServerSocketChannel
+        //Windows下借用了pipe管道 linux下是epoll
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        //设置成非阻塞 最底层是一个native的方法 调用了最底层的IOUtil来实现了非阻塞的效果
         serverSocketChannel.configureBlocking(false);
+        //使用单例模式开启了一个套接字
         ServerSocket serverSocket = serverSocketChannel.socket();
+        //绑定端口号
         serverSocket.bind(new InetSocketAddress(port));
-
+        //获取对应的selector
         selector = Selector.open();
-
+        //把channel注册到selector上 默认为接受状态
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         System.out.println("server start-----"+port);
     }
 
+    /**
+     * 监听
+     * @throws IOException
+     */
     private void listen() throws IOException {
         while (true){
             selector.select();
+            //获取现在已经注册的动作
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
+            //迭代并处理
             Iterator<SelectionKey> iterator = selectionKeys.iterator();
             while (iterator.hasNext()){
                 SelectionKey selectionKey = iterator.next();
