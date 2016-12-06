@@ -12,9 +12,8 @@ public enum EnumImpls {
             if(handler != null){
                 System.out.println("放过请求");
                 handler.dealReqest();
-            }else{
-                super.dealReqest();
             }
+                super.dealReqest();
         }
     },B{
         @Override
